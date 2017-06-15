@@ -11,12 +11,13 @@ class BlockChain():
     def latest_block(self):
         return self.blockchain_store[-1]
 
-    def generate_next_block(self, data):
+    def generate_next_block(self, data, public_key):
         index = len(self.blockchain_store)
         previous_hash = self.latest_block().hash
         timestamp = int(time.time())
 
-        params = block_params.BlockParams(index, previous_hash, timestamp, data)
+        params = block_params.BlockParams(
+            index, previous_hash, timestamp, data, public_key)
         new_block = block.Block(params)
         self.blockchain_store.append(new_block)
 

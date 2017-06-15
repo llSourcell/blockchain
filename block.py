@@ -1,4 +1,5 @@
 import hashlib
+from Crypto.PublicKey import RSA
 from . import block_params
 
 
@@ -35,3 +36,7 @@ class Block():
 
     def has_valid_hash(self):
         return self.calc_hash() == self.hash
+
+    def decrypt_data(self, private_key):
+        key = RSA.importKey(private_key)
+        return key.decrypt(self.data)
